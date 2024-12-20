@@ -1,0 +1,311 @@
+2024-12-20T10:11:24,026 [main] INFO  com.helger.commons.mock.SPITestHelper - Checking SPI file C:\O\OneDrive - adapton AG\Desktop\phase4-master\phase4-peppol-server-webapp\src\main\resources\META-INF\services\com.helger.phase4.incoming.spi.IAS4IncomingMessageProcessorSPI
+2024-12-20T10:11:24,062 [main] INFO  com.helger.commons.mock.SPITestHelper -   All implementations (1) are valid!
+2024-12-20T10:11:24,063 [main] INFO  com.helger.commons.mock.SPITestHelper - Checking SPI file C:\O\OneDrive - adapton AG\Desktop\phase4-master\phase4-peppol-server-webapp\src\main\resources\META-INF\services\com.helger.phase4.peppol.servlet.IPhase4PeppolIncomingSBDHandlerSPI
+2024-12-20T10:11:24,074 [main] INFO  com.helger.commons.mock.SPITestHelper -   All implementations (1) are valid!
+2024-12-20T10:11:24,142 [main] INFO  com.helger.photon.io.WebFileIO - Using 'C:\O\OneDrive - adapton AG\Desktop\phase4-master\phase4-peppol-server-webapp\target\webapp-classes' as the data path
+2024-12-20T10:11:24,148 [main] INFO  com.helger.photon.io.WebFileIO - Using 'C:\O\OneDrive - adapton AG\Desktop\phase4-master\phase4-peppol-server-webapp\target\webapp-classes' as the servlet context path
+2024-12-20T10:11:24,153 [main] INFO  com.helger.web.scope.mgr.WebScopeManager - Session passivation is now disabled
+2024-12-20T10:11:24,164 [main] INFO  com.helger.photon.security.password.hash.PasswordHashCreatorManager - Default PasswordHashCreator algorithm set to 'PBKDF2_SHA256_1000_48'
+2024-12-20T10:11:24,165 [main] INFO  com.helger.photon.security.password.GlobalPasswordSettings - Set global password constraints to [PasswordConstraintList@0x4233e892: constraints=[[PasswordConstraintMinLength@0x077d2e85: minLength=8]]]
+2024-12-20T10:11:24,196 [main] INFO  com.helger.photon.core.servlet.WebAppListener - Servlet context 'MockServletContext' was initialized in 90 milli seconds
+2024-12-20T10:11:24,639 [main] INFO  com.helger.photon.core.servlet.WebAppListener - Servlet context 'MockServletContext' is being destroyed
+2024-12-20T10:11:24,679 [main] INFO  com.helger.photon.core.servlet.WebAppListener - Servlet context 'MockServletContext' was destroyed in 40 milli seconds
+2024-12-20T10:11:34,279 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.24; built: 2024-08-26T18:11:22.448Z; git: 5dfc59a691b748796f922208956bd1f2794bcd16; jvm 22.0.2+9-70
+2024-12-20T10:11:34,891 [main] INFO  org.eclipse.jetty.server.session.DefaultSessionIdManager - Session workerName=node0
+2024-12-20T10:11:34,962 [main] WARN  org.eclipse.jetty.webapp.WebAppContext - Failed startup of context o.e.j.w.WebAppContext@5c09d180{phase4 BDEW Server,/,file:///C:/O/OneDrive%20-%20adapton%20AG/Desktop/phase4-master/phase4-peppol-server-webapp/target/webapp-classes/,UNAVAILABLE}
+java.lang.NoClassDefFoundError: javax/xml/bind/JAXBElement
+	at com.helger.jaxb.config.JAXBEqualsImplementationRegistrarSPI.registerEqualsImplementations(JAXBEqualsImplementationRegistrarSPI.java:40) ~[ph-jaxb-9.3.9.jar:9.3.9]
+	at com.helger.commons.equals.EqualsImplementationRegistry.reinitialize(EqualsImplementationRegistry.java:324) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsImplementationRegistry.<init>(EqualsImplementationRegistry.java:96) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsImplementationRegistry$SingletonHolder.<clinit>(EqualsImplementationRegistry.java:56) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsImplementationRegistry.getInstance(EqualsImplementationRegistry.java:107) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsImplementationRegistry.areEqual(EqualsImplementationRegistry.java:297) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsHelper.equals(EqualsHelper.java:225) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.ValueEnforcer.isEqual(ValueEnforcer.java:1510) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.url.URLHelper.getAsFile(URLHelper.java:900) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.url.URLHelper.getAsFileOrNull(URLHelper.java:929) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.io.resource.URLResource.getAsFile(URLResource.java:194) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.config.source.res.AbstractConfigurationSourceResource.<init>(AbstractConfigurationSourceResource.java:58) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.source.res.ConfigurationSourceProperties.<init>(ConfigurationSourceProperties.java:118) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.ConfigFactory.lambda$createDefaultValueProvider$5(ConfigFactory.java:297) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.source.MultiConfigurationValueProvider.createForAllOccurrances(MultiConfigurationValueProvider.java:358) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.ConfigFactory.createDefaultValueProvider(ConfigFactory.java:295) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.ConfigFactory.<clinit>(ConfigFactory.java:80) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.phase4.config.AS4Configuration.createPhase4ValueProvider(AS4Configuration.java:87) ~[phase4-lib-3.0.0.jar:3.0.0]
+	at com.helger.phase4.config.AS4Configuration.<clinit>(AS4Configuration.java:111) ~[phase4-lib-3.0.0.jar:3.0.0]
+	at com.helger.phase4.peppol.server.servlet.Phase4PeppolWebAppListener.getInitParameterDebug(Phase4PeppolWebAppListener.java:87) ~[classes/:?]
+	at com.helger.photon.core.servlet.WebAppListener.contextInitialized(WebAppListener.java:649) ~[ph-oton-core-9.2.7.jar:9.2.7]
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:1046) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:624) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.ContextHandler.contextInitialized(ContextHandler.java:983) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:740) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:392) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1305) ~[jetty-webapp-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:902) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.doStart(ServletContextHandler.java:306) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:533) [jetty-webapp-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:121) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.Server.start(Server.java:470) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:415) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at com.helger.photon.jetty.JettyStarter.run(JettyStarter.java:740) [ph-oton-jetty-9.2.7.jar:9.2.7]
+	at com.helger.phase4.peppol.server.standalone.RunInJettyPHASE4PEPPOL.main(RunInJettyPHASE4PEPPOL.java:33) [test-classes/:?]
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBElement
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[?:?]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[?:?]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[?:?]
+	... 43 more
+2024-12-20T10:11:34,984 [main] ERROR com.helger.photon.jetty.JettyStarter - Failed to start Jetty RunInJettyPHASE4PEPPOL - stopping server!
+2024-12-20T10:11:34,984 [main] INFO  org.eclipse.jetty.server.Server - Stopped Server@4b213651{STOPPING}[11.0.24,sto=0]
+2024-12-20T10:11:34,989 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@5c09d180{phase4 BDEW Server,/,file:///C:/O/OneDrive%20-%20adapton%20AG/Desktop/phase4-master/phase4-peppol-server-webapp/target/webapp-classes/,STOPPED}
+2024-12-20T10:11:34,990 [main] ERROR com.helger.photon.jetty.JettyStarter - Failed to start Jetty RunInJettyPHASE4PEPPOL - stopped server!
+2024-12-20T10:13:31,368 [main] INFO  com.helger.commons.mock.SPITestHelper - Checking SPI file C:\O\OneDrive - adapton AG\Desktop\phase4-master\phase4-peppol-server-webapp\src\main\resources\META-INF\services\com.helger.phase4.incoming.spi.IAS4IncomingMessageProcessorSPI
+2024-12-20T10:13:31,403 [main] INFO  com.helger.commons.mock.SPITestHelper -   All implementations (1) are valid!
+2024-12-20T10:13:31,404 [main] INFO  com.helger.commons.mock.SPITestHelper - Checking SPI file C:\O\OneDrive - adapton AG\Desktop\phase4-master\phase4-peppol-server-webapp\src\main\resources\META-INF\services\com.helger.phase4.peppol.servlet.IPhase4PeppolIncomingSBDHandlerSPI
+2024-12-20T10:13:31,406 [main] INFO  com.helger.commons.mock.SPITestHelper -   All implementations (1) are valid!
+2024-12-20T10:13:31,488 [main] INFO  com.helger.photon.io.WebFileIO - Using 'C:\O\OneDrive - adapton AG\Desktop\phase4-master\phase4-peppol-server-webapp\target\webapp-classes' as the data path
+2024-12-20T10:13:31,493 [main] INFO  com.helger.photon.io.WebFileIO - Using 'C:\O\OneDrive - adapton AG\Desktop\phase4-master\phase4-peppol-server-webapp\target\webapp-classes' as the servlet context path
+2024-12-20T10:13:31,501 [main] INFO  com.helger.web.scope.mgr.WebScopeManager - Session passivation is now disabled
+2024-12-20T10:13:31,514 [main] INFO  com.helger.photon.security.password.hash.PasswordHashCreatorManager - Default PasswordHashCreator algorithm set to 'PBKDF2_SHA256_1000_48'
+2024-12-20T10:13:31,516 [main] INFO  com.helger.photon.security.password.GlobalPasswordSettings - Set global password constraints to [PasswordConstraintList@0x35e5d0e5: constraints=[[PasswordConstraintMinLength@0x73173f63: minLength=8]]]
+2024-12-20T10:13:31,550 [main] INFO  com.helger.photon.core.servlet.WebAppListener - Servlet context 'MockServletContext' was initialized in 105 milli seconds
+2024-12-20T10:13:32,017 [main] INFO  com.helger.photon.core.servlet.WebAppListener - Servlet context 'MockServletContext' is being destroyed
+2024-12-20T10:13:32,050 [main] INFO  com.helger.photon.core.servlet.WebAppListener - Servlet context 'MockServletContext' was destroyed in 33 milli seconds
+2024-12-20T10:27:41,445 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.24; built: 2024-08-26T18:11:22.448Z; git: 5dfc59a691b748796f922208956bd1f2794bcd16; jvm 22.0.2+9-70
+2024-12-20T10:27:42,095 [main] INFO  org.eclipse.jetty.server.session.DefaultSessionIdManager - Session workerName=node0
+2024-12-20T10:27:42,184 [main] WARN  org.eclipse.jetty.webapp.WebAppContext - Failed startup of context o.e.j.w.WebAppContext@5c09d180{phase4 BDEW Server,/,file:///C:/O/OneDrive%20-%20adapton%20AG/Desktop/phase4-master/phase4-peppol-server-webapp/target/webapp-classes/,UNAVAILABLE}
+java.lang.NoClassDefFoundError: javax/xml/bind/JAXBElement
+	at com.helger.jaxb.config.JAXBEqualsImplementationRegistrarSPI.registerEqualsImplementations(JAXBEqualsImplementationRegistrarSPI.java:40) ~[ph-jaxb-9.3.9.jar:9.3.9]
+	at com.helger.commons.equals.EqualsImplementationRegistry.reinitialize(EqualsImplementationRegistry.java:324) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsImplementationRegistry.<init>(EqualsImplementationRegistry.java:96) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsImplementationRegistry$SingletonHolder.<clinit>(EqualsImplementationRegistry.java:56) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsImplementationRegistry.getInstance(EqualsImplementationRegistry.java:107) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsImplementationRegistry.areEqual(EqualsImplementationRegistry.java:297) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsHelper.equals(EqualsHelper.java:225) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.ValueEnforcer.isEqual(ValueEnforcer.java:1510) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.url.URLHelper.getAsFile(URLHelper.java:900) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.url.URLHelper.getAsFileOrNull(URLHelper.java:929) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.io.resource.URLResource.getAsFile(URLResource.java:194) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.config.source.res.AbstractConfigurationSourceResource.<init>(AbstractConfigurationSourceResource.java:58) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.source.res.ConfigurationSourceProperties.<init>(ConfigurationSourceProperties.java:118) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.ConfigFactory.lambda$createDefaultValueProvider$5(ConfigFactory.java:297) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.source.MultiConfigurationValueProvider.createForAllOccurrances(MultiConfigurationValueProvider.java:358) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.ConfigFactory.createDefaultValueProvider(ConfigFactory.java:295) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.ConfigFactory.<clinit>(ConfigFactory.java:80) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.phase4.config.AS4Configuration.createPhase4ValueProvider(AS4Configuration.java:87) ~[phase4-lib-3.0.0.jar:3.0.0]
+	at com.helger.phase4.config.AS4Configuration.<clinit>(AS4Configuration.java:111) ~[phase4-lib-3.0.0.jar:3.0.0]
+	at com.helger.phase4.peppol.server.servlet.Phase4PeppolWebAppListener.getInitParameterDebug(Phase4PeppolWebAppListener.java:87) ~[classes/:?]
+	at com.helger.photon.core.servlet.WebAppListener.contextInitialized(WebAppListener.java:649) ~[ph-oton-core-9.2.7.jar:9.2.7]
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:1046) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:624) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.ContextHandler.contextInitialized(ContextHandler.java:983) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:740) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:392) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1305) ~[jetty-webapp-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:902) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.doStart(ServletContextHandler.java:306) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:533) [jetty-webapp-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:121) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.Server.start(Server.java:470) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:415) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at com.helger.photon.jetty.JettyStarter.run(JettyStarter.java:740) [ph-oton-jetty-9.2.7.jar:9.2.7]
+	at com.helger.phase4.peppol.server.standalone.RunInJettyPHASE4PEPPOL.main(RunInJettyPHASE4PEPPOL.java:33) [test-classes/:?]
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBElement
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[?:?]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[?:?]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[?:?]
+	... 43 more
+2024-12-20T10:27:42,208 [main] ERROR com.helger.photon.jetty.JettyStarter - Failed to start Jetty RunInJettyPHASE4PEPPOL - stopping server!
+2024-12-20T10:27:42,208 [main] INFO  org.eclipse.jetty.server.Server - Stopped Server@4b213651{STOPPING}[11.0.24,sto=0]
+2024-12-20T10:27:42,213 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@5c09d180{phase4 BDEW Server,/,file:///C:/O/OneDrive%20-%20adapton%20AG/Desktop/phase4-master/phase4-peppol-server-webapp/target/webapp-classes/,STOPPED}
+2024-12-20T10:27:42,214 [main] ERROR com.helger.photon.jetty.JettyStarter - Failed to start Jetty RunInJettyPHASE4PEPPOL - stopped server!
+2024-12-20T10:33:23,397 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.24; built: 2024-08-26T18:11:22.448Z; git: 5dfc59a691b748796f922208956bd1f2794bcd16; jvm 22.0.2+9-70
+2024-12-20T10:33:23,640 [main] WARN  org.eclipse.jetty.servlet.BaseHolder - Unable to load class com.helger.phase4.peppol.server.servlet.Phase4PeppolWebAppListener
+java.lang.ClassNotFoundException: com.helger.phase4.peppol.server.servlet.Phase4PeppolWebAppListener
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[?:?]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[?:?]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[?:?]
+	at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:460) ~[jetty-webapp-11.0.24.jar:11.0.24]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[?:?]
+	at org.eclipse.jetty.util.Loader.loadClass(Loader.java:59) ~[jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.BaseHolder.doStart(BaseHolder.java:97) [jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ListenerHolder.doStart(ListenerHolder.java:69) [jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:382) [jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1305) [jetty-webapp-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:902) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.doStart(ServletContextHandler.java:306) [jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:533) [jetty-webapp-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:121) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.Server.start(Server.java:470) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:415) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at com.helger.photon.jetty.JettyStarter.run(JettyStarter.java:740) [ph-oton-jetty-9.2.7.jar:9.2.7]
+	at com.helger.phase4.peppol.server.standalone.RunInJettyPHASE4PEPPOL.main(RunInJettyPHASE4PEPPOL.java:33) [test-classes/:?]
+	Suppressed: java.lang.ClassNotFoundException: com.helger.phase4.peppol.server.servlet.Phase4PeppolWebAppListener
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445) ~[?:?]
+		at org.eclipse.jetty.webapp.WebAppClassLoader.findClass(WebAppClassLoader.java:581) ~[jetty-webapp-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:484) ~[jetty-webapp-11.0.24.jar:11.0.24]
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[?:?]
+		at org.eclipse.jetty.util.Loader.loadClass(Loader.java:59) ~[jetty-util-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.servlet.BaseHolder.doStart(BaseHolder.java:97) [jetty-servlet-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.servlet.ListenerHolder.doStart(ListenerHolder.java:69) [jetty-servlet-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:382) [jetty-servlet-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1305) [jetty-webapp-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:902) [jetty-server-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.servlet.ServletContextHandler.doStart(ServletContextHandler.java:306) [jetty-servlet-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:533) [jetty-webapp-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) [jetty-util-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:121) [jetty-util-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) [jetty-server-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) [jetty-util-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.server.Server.start(Server.java:470) [jetty-server-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114) [jetty-util-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) [jetty-server-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.server.Server.doStart(Server.java:415) [jetty-server-11.0.24.jar:11.0.24]
+		at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+		at com.helger.photon.jetty.JettyStarter.run(JettyStarter.java:740) [ph-oton-jetty-9.2.7.jar:9.2.7]
+		at com.helger.phase4.peppol.server.standalone.RunInJettyPHASE4PEPPOL.main(RunInJettyPHASE4PEPPOL.java:33) [test-classes/:?]
+2024-12-20T10:33:23,652 [main] WARN  org.eclipse.jetty.webapp.WebAppContext - Failed startup of context o.e.j.w.WebAppContext@23d1e5d0{phase4 BDEW Server,/,file:///C:/O/OneDrive%20-%20adapton%20AG/Desktop/phase4-master/phase4-peppol-server-webapp/target/webapp-classes/,UNAVAILABLE}
+jakarta.servlet.UnavailableException: Class loading error for holder com.helger.phase4.peppol.server.servlet.Phase4PeppolWebAppListener@5ee2b6f9{src=DESCRIPTOR:file:///C:/O/OneDrive%20-%20adapton%20AG/Desktop/phase4-master/phase4-peppol-server-webapp/target/webapp-classes/WEB-INF/web.xml}
+	at org.eclipse.jetty.servlet.BaseHolder.doStart(BaseHolder.java:104) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ListenerHolder.doStart(ListenerHolder.java:69) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) ~[jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:382) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1305) ~[jetty-webapp-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:902) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.doStart(ServletContextHandler.java:306) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:533) [jetty-webapp-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:121) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.Server.start(Server.java:470) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:415) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at com.helger.photon.jetty.JettyStarter.run(JettyStarter.java:740) [ph-oton-jetty-9.2.7.jar:9.2.7]
+	at com.helger.phase4.peppol.server.standalone.RunInJettyPHASE4PEPPOL.main(RunInJettyPHASE4PEPPOL.java:33) [test-classes/:?]
+2024-12-20T10:33:23,656 [main] ERROR com.helger.photon.jetty.JettyStarter - Failed to start Jetty RunInJettyPHASE4PEPPOL!
+jakarta.servlet.UnavailableException: Class loading error for holder com.helger.phase4.peppol.server.servlet.Phase4PeppolWebAppListener@5ee2b6f9{src=DESCRIPTOR:file:///C:/O/OneDrive%20-%20adapton%20AG/Desktop/phase4-master/phase4-peppol-server-webapp/target/webapp-classes/WEB-INF/web.xml}
+	at org.eclipse.jetty.servlet.BaseHolder.doStart(BaseHolder.java:104) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ListenerHolder.doStart(ListenerHolder.java:69) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) ~[jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:382) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1305) ~[jetty-webapp-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:902) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.doStart(ServletContextHandler.java:306) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:533) ~[jetty-webapp-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) ~[jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) ~[jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:121) ~[jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) ~[jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) ~[jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.Server.start(Server.java:470) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114) ~[jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:415) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) ~[jetty-util-11.0.24.jar:11.0.24]
+	at com.helger.photon.jetty.JettyStarter.run(JettyStarter.java:740) [ph-oton-jetty-9.2.7.jar:9.2.7]
+	at com.helger.phase4.peppol.server.standalone.RunInJettyPHASE4PEPPOL.main(RunInJettyPHASE4PEPPOL.java:33) [test-classes/:?]
+2024-12-20T10:33:23,657 [main] ERROR com.helger.photon.jetty.JettyStarter - Failed to start Jetty RunInJettyPHASE4PEPPOL - stopping server!
+2024-12-20T10:33:23,657 [main] INFO  org.eclipse.jetty.server.Server - Stopped Server@4b213651{STOPPING}[11.0.24,sto=0]
+2024-12-20T10:33:23,659 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@23d1e5d0{phase4 BDEW Server,/,file:///C:/O/OneDrive%20-%20adapton%20AG/Desktop/phase4-master/phase4-peppol-server-webapp/target/webapp-classes/,STOPPED}
+2024-12-20T10:33:23,659 [main] ERROR com.helger.photon.jetty.JettyStarter - Failed to start Jetty RunInJettyPHASE4PEPPOL - stopped server!
+2024-12-20T11:47:57,301 [main] INFO  com.helger.commons.mock.SPITestHelper - Checking SPI file C:\O\OneDrive - adapton AG\Desktop\phase4-master\phase4-peppol-server-webapp\src\main\resources\META-INF\services\com.helger.phase4.incoming.spi.IAS4IncomingMessageProcessorSPI
+2024-12-20T11:47:57,340 [main] INFO  com.helger.commons.mock.SPITestHelper -   All implementations (1) are valid!
+2024-12-20T11:47:57,341 [main] INFO  com.helger.commons.mock.SPITestHelper - Checking SPI file C:\O\OneDrive - adapton AG\Desktop\phase4-master\phase4-peppol-server-webapp\src\main\resources\META-INF\services\com.helger.phase4.peppol.servlet.IPhase4PeppolIncomingSBDHandlerSPI
+2024-12-20T11:47:57,343 [main] INFO  com.helger.commons.mock.SPITestHelper -   All implementations (1) are valid!
+2024-12-20T11:47:57,454 [main] INFO  com.helger.photon.io.WebFileIO - Using 'C:\O\OneDrive - adapton AG\Desktop\phase4-master\phase4-peppol-server-webapp\target\webapp-classes' as the data path
+2024-12-20T11:47:57,462 [main] INFO  com.helger.photon.io.WebFileIO - Using 'C:\O\OneDrive - adapton AG\Desktop\phase4-master\phase4-peppol-server-webapp\target\webapp-classes' as the servlet context path
+2024-12-20T11:47:57,474 [main] INFO  com.helger.web.scope.mgr.WebScopeManager - Session passivation is now disabled
+2024-12-20T11:47:57,494 [main] INFO  com.helger.photon.security.password.hash.PasswordHashCreatorManager - Default PasswordHashCreator algorithm set to 'PBKDF2_SHA256_1000_48'
+2024-12-20T11:47:57,497 [main] INFO  com.helger.photon.security.password.GlobalPasswordSettings - Set global password constraints to [PasswordConstraintList@0x2cc3ad05: constraints=[[PasswordConstraintMinLength@0x710b18a6: minLength=8]]]
+2024-12-20T11:47:57,552 [main] INFO  com.helger.photon.core.servlet.WebAppListener - Servlet context 'MockServletContext' was initialized in 160 milli seconds
+2024-12-20T11:47:58,199 [main] INFO  com.helger.photon.core.servlet.WebAppListener - Servlet context 'MockServletContext' is being destroyed
+2024-12-20T11:47:58,252 [main] INFO  com.helger.photon.core.servlet.WebAppListener - Servlet context 'MockServletContext' was destroyed in 52 milli seconds
+2024-12-20T11:48:11,052 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.24; built: 2024-08-26T18:11:22.448Z; git: 5dfc59a691b748796f922208956bd1f2794bcd16; jvm 22.0.2+9-70
+2024-12-20T11:48:11,751 [main] INFO  org.eclipse.jetty.server.session.DefaultSessionIdManager - Session workerName=node0
+2024-12-20T11:48:11,863 [main] WARN  org.eclipse.jetty.webapp.WebAppContext - Failed startup of context o.e.j.w.WebAppContext@5c09d180{phase4 BDEW Server,/,file:///C:/O/OneDrive%20-%20adapton%20AG/Desktop/phase4-master/phase4-peppol-server-webapp/target/webapp-classes/,UNAVAILABLE}
+java.lang.NoClassDefFoundError: javax/xml/bind/JAXBElement
+	at com.helger.jaxb.config.JAXBEqualsImplementationRegistrarSPI.registerEqualsImplementations(JAXBEqualsImplementationRegistrarSPI.java:40) ~[ph-jaxb-9.3.9.jar:9.3.9]
+	at com.helger.commons.equals.EqualsImplementationRegistry.reinitialize(EqualsImplementationRegistry.java:324) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsImplementationRegistry.<init>(EqualsImplementationRegistry.java:96) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsImplementationRegistry$SingletonHolder.<clinit>(EqualsImplementationRegistry.java:56) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsImplementationRegistry.getInstance(EqualsImplementationRegistry.java:107) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsImplementationRegistry.areEqual(EqualsImplementationRegistry.java:297) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.equals.EqualsHelper.equals(EqualsHelper.java:225) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.ValueEnforcer.isEqual(ValueEnforcer.java:1510) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.url.URLHelper.getAsFile(URLHelper.java:900) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.url.URLHelper.getAsFileOrNull(URLHelper.java:929) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.commons.io.resource.URLResource.getAsFile(URLResource.java:194) ~[ph-commons-11.1.10.jar:11.1.10]
+	at com.helger.config.source.res.AbstractConfigurationSourceResource.<init>(AbstractConfigurationSourceResource.java:58) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.source.res.ConfigurationSourceProperties.<init>(ConfigurationSourceProperties.java:118) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.ConfigFactory.lambda$createDefaultValueProvider$5(ConfigFactory.java:297) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.source.MultiConfigurationValueProvider.createForAllOccurrances(MultiConfigurationValueProvider.java:358) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.ConfigFactory.createDefaultValueProvider(ConfigFactory.java:295) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.config.ConfigFactory.<clinit>(ConfigFactory.java:80) ~[ph-config-11.1.10.jar:11.1.10]
+	at com.helger.phase4.config.AS4Configuration.createPhase4ValueProvider(AS4Configuration.java:87) ~[phase4-lib-3.0.0.jar:3.0.0]
+	at com.helger.phase4.config.AS4Configuration.<clinit>(AS4Configuration.java:111) ~[phase4-lib-3.0.0.jar:3.0.0]
+	at com.helger.phase4.peppol.server.servlet.Phase4PeppolWebAppListener.getInitParameterDebug(Phase4PeppolWebAppListener.java:88) ~[classes/:?]
+	at com.helger.photon.core.servlet.WebAppListener.contextInitialized(WebAppListener.java:649) ~[ph-oton-core-9.2.7.jar:9.2.7]
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:1046) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:624) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.ContextHandler.contextInitialized(ContextHandler.java:983) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:740) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:392) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1305) ~[jetty-webapp-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:902) ~[jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.servlet.ServletContextHandler.doStart(ServletContextHandler.java:306) ~[jetty-servlet-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:533) [jetty-webapp-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:121) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:171) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.Server.start(Server.java:470) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114) [jetty-util-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:89) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:415) [jetty-server-11.0.24.jar:11.0.24]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:93) [jetty-util-11.0.24.jar:11.0.24]
+	at com.helger.photon.jetty.JettyStarter.run(JettyStarter.java:740) [ph-oton-jetty-9.2.7.jar:9.2.7]
+	at com.helger.phase4.peppol.server.standalone.RunInJettyPHASE4PEPPOL.main(RunInJettyPHASE4PEPPOL.java:33) [test-classes/:?]
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBElement
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[?:?]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[?:?]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[?:?]
+	... 43 more
+2024-12-20T11:48:11,896 [main] ERROR com.helger.photon.jetty.JettyStarter - Failed to start Jetty RunInJettyPHASE4PEPPOL - stopping server!
+2024-12-20T11:48:11,896 [main] INFO  org.eclipse.jetty.server.Server - Stopped Server@4b213651{STOPPING}[11.0.24,sto=0]
+2024-12-20T11:48:11,904 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@5c09d180{phase4 BDEW Server,/,file:///C:/O/OneDrive%20-%20adapton%20AG/Desktop/phase4-master/phase4-peppol-server-webapp/target/webapp-classes/,STOPPED}
+2024-12-20T11:48:11,905 [main] ERROR com.helger.photon.jetty.JettyStarter - Failed to start Jetty RunInJettyPHASE4PEPPOL - stopped server!

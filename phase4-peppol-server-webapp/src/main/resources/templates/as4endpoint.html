@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>AS4 Endpoint</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .feature-list {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .nav-link {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>AS4 Endpoint</h1>
+    <img src="/imgs/logo.png" alt="Logo" height="100"/>
+    <p>This is the AS4 message exchange endpoint for BDEW profile.</p>
+
+    <div class="feature-list">
+        <h2>Features:</h2>
+        <ul>
+            <li>Accepts AS4 messages via POST method</li>
+            <li>Profile validation: Disabled</li>
+            <li>Current profile: BDEW</li>
+            <li>Message processing: Asynchronous</li>
+        </ul>
+    </div>
+
+    <div class="nav-link">
+        <p>View message history: <a href="/messages">/messages</a></p>
+    </div>
+</div>
+</body>
+</html>

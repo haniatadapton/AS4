@@ -1,0 +1,107 @@
+/*
+ * Copyright (C) 2015-2024 Philip Helger (www.helger.com)
+ * philip[at]helger[dot]com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.helger.phase4.incoming;
+
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+
+import com.helger.commons.annotation.Nonempty;
+import com.helger.commons.collection.impl.ICommonsList;
+import com.helger.commons.datetime.PDTWebDateHelper;
+import com.helger.commons.string.StringHelper;
+import com.helger.json.IJsonArray;
+import com.helger.json.IJsonObject;
+import com.helger.json.JsonArray;
+import com.helger.json.JsonObject;
+
+import jakarta.servlet.http.Cookie;
+
+/**
+ * Messaging helper methods.<br>
+ * Old name before v3: <code>AS4MessagingHelper</code>
+ *
+ * @author Philip Helger
+ * @since 0.9.10
+ */
+@Immutable
+public final class AS4IncomingHelper
+{
+  private AS4IncomingHelper ()
+  {}
+
+  /**
+   * Convert an {@link IAS4IncomingMessageMetadata} structure to a JSON
+   * representation.
+   *
+   * @param aMessageMetadata
+   *        The message metadata to convert. May not be <code>null</code>.
+   * @return A non-<code>null</code> JSON object.
+   */
+  @Nonnull
+  @Nonempty
+  public static IJsonObject getIncomingMetadataAsJson (@Nonnull final IAS4IncomingMessageMetadata aMessageMetadata)
+  {
+    final IJsonObject aMap = new JsonObject ();
+    aMap.add ("IncomingUniqueID", aMessageMetadata.getIncomingUniqueID ());
+    aMap.add ("IncomingDT", PDTWebDateHelper.getAsStringXSD (aMessageMetadata.getIncomingDT ()));
+    aMap.add ("Mode", aMessageMetadata.getMode ().getID ());
+    if (aMessageMetadata.hasRemoteAddr ())
+      aMap.add ("RemoteAddr", aMessageMetadata.getRemoteAddr ());
+    if (aMessageMetadata.hasRemoteHost ())
+      aMap.add ("RemoteHost", aMessageMetadata.getRemoteHost ());
+    if (aMessageMetadata.hasRemotePort ())
+      aMap.add ("RemotePort", aMessageMetadata.getRemotePort ());
+    if (aMessageMetadata.hasRemoteUser ())
+      aMap.add ("RemoteUser", aMessageMetadata.getRemoteUser ());
+    {
+      final IJsonArray aArray = new JsonArray ();
+      for (final Cookie aCookie : aMessageMetadata.cookies ())
+      {
+        final IJsonObject aCookieObj = new JsonObject ();
+        if (StringHelper.hasText (aCookie.getDomain ()))
+          aCookieObj.add ("Domain", aCookie.getDomain ());
+        if (StringHelper.hasText (aCookie.getPath ()))
+          aCookieObj.add ("Path", aCookie.getPath ());
+        aCookieObj.add ("Secure", aCookie.getSecure ());
+        aCookieObj.add ("HttpOnly", aCookie.isHttpOnly ());
+        aCookieObj.add ("Name", aCookie.getName ());
+        aCookieObj.add ("Value", aCookie.getValue ());
+        aCookieObj.add ("MaxAge", aCookie.getMaxAge ());
+        aArray.add (aCookieObj);
+      }
+      if (aArray.isNotEmpty ())
+        aMap.addJson ("Cookies", aArray);
+    }
+    {
+      final IJsonArray aArray = new JsonArray ();
+      for (final var aHeader : aMessageMetadata.getAllHttpHeaders ())
+      {
+        final ICommonsList <String> aHeaderValues = aHeader.getValue ();
+
+        final IJsonObject aObj = new JsonObject ();
+        if (aHeaderValues.size () != 1)
+          aObj.add (aHeader.getKey (), new JsonArray ().addAll (aHeaderValues));
+        else
+          aObj.add (aHeader.getKey (), aHeaderValues.getFirstOrNull ());
+        aArray.add (aObj);
+      }
+      if (aArray.isNotEmpty ())
+        aMap.addJson ("HttpHeaders", aArray);
+    }
+    return aMap;
+  }
+}

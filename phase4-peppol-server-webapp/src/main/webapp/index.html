@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AS4 Endpoint</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            border-radius: 3px;
+            margin: 10px 0;
+        }
+        .status.running {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .logo {
+            max-width: 200px;
+            margin: 20px 0;
+        }
+        .nav-links {
+            margin-top: 20px;
+        }
+        .nav-links a {
+            color: #337ab7;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="/imgs/adapton-logo.png" alt="AS4 Logo" class="logo">
+        <h1>AS4 Endpoint</h1>
+        <div class="status running">
+            Status: Running
+        </div>
+        <div class="nav-links">
+            <a href="/messages">View Messages</a>
+            <a href="https://github.com/phax/phase4/">Documentation</a>
+        </div>
+    </div>
+</body>
+</html>
