@@ -129,6 +129,12 @@
           <artifactId>phase4-profile-bdew</artifactId>
           <version>3.0.0-beta2</version>
       </dependency>
+  
+    <dependency>
+      <groupId>com.helger.commons</groupId>
+      <artifactId>ph-security</artifactId>
+      <version>11.1.11</version>
+    </dependency>
   </dependencies>
 
   <build>
