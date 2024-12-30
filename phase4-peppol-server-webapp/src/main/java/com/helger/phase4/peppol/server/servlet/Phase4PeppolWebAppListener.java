@@ -374,11 +374,92 @@ public final class Phase4PeppolWebAppListener extends WebAppListener
     }
   }
 
+  private static void _initBDEWAS4()
+  {
+    // Add BouncyCastle provider if not already added
+    if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+        Security.addProvider(new BouncyCastleProvider());
+    }
+
+    // Configure BDEW Profile settings
+    System.setProperty("phase4.profile", "bdew");
+    
+    // BDEW specific party identifiers with more specific values
+    System.setProperty("phase4.bdew.initiator.type", "urn:oasis:names:tc:ebcore:partyid-type:unregistered:bdew");
+    System.setProperty("phase4.bdew.responder.type", "urn:oasis:names:tc:ebcore:partyid-type:unregistered:bdew");
+    System.setProperty("phase4.bdew.initiator.id", "as4.test.sender");
+    System.setProperty("phase4.bdew.responder.id", "as4.test.receiver");
+    
+    // BDEW specific message properties with updated values
+    System.setProperty("phase4.bdew.agreement", "https://www.bdew.de/as4/communication/agreement");
+    System.setProperty("phase4.bdew.service", "http://bdew.de/services/EDI");
+    System.setProperty("phase4.bdew.action", "EDIMessageProcessing");
+    System.setProperty("phase4.bdew.process", "urn:bdew:de:edl:as4:process");
+
+    // Configure crypto algorithms through configuration properties
+    System.setProperty("phase4.crypto.properties.signaturealgorithm", ECryptoAlgorithmSign.ECDSA_SHA_256.getID());
+    System.setProperty("phase4.crypto.properties.encryptionalgorithm", ECryptoAlgorithmCrypt.AES_128_GCM.getID());
+
+    // Configure TLS named groups for BDEW
+    System.setProperty("jdk.tls.namedGroups", "brainpoolP256r1, brainpoolP384r1, brainpoolP512r1, secp256r1, secp384r1");
+
+    // Configure keystore with absolute path
+    String keystorePath = new File("ks2.p12").getAbsolutePath();
+    System.setProperty("phase4.crypto.properties.keystore.type", "PKCS12");
+    System.setProperty("phase4.crypto.properties.keystore.path", keystorePath);
+    System.setProperty("phase4.crypto.properties.keystore.password", "changeit");
+    System.setProperty("phase4.crypto.properties.keystore.alias", "cert2");
+    System.setProperty("phase4.crypto.properties.keystore.key.password", "changeit");
+
+    // Disable certificate validations for testing
+    System.setProperty("phase4.cert.validation.disabled", "true");
+    System.setProperty("phase4.debug", "true");
+
+    // Initialize BDEW profile
+    try {
+        // Ensure BDEW profile is registered and set as default
+        AS4ProfileSelector.setCustomDefaultAS4ProfileID("bdew");
+        
+        // Completely disable Peppol
+        System.setProperty("phase4.peppol.validation.disabled", "true");
+        System.setProperty("phase4.peppol.enabled", "false");
+        
+        // Enable BDEW validation with debug
+        System.setProperty("phase4.bdew.validation.enabled", "true");
+        System.setProperty("phase4.bdew.debug", "true");
+        
+        // Log current configuration
+        LOGGER.info("BDEW Profile Configuration:");
+        LOGGER.info("Initiator Type: " + System.getProperty("phase4.bdew.initiator.type"));
+        LOGGER.info("Initiator ID: " + System.getProperty("phase4.bdew.initiator.id"));
+        LOGGER.info("Responder Type: " + System.getProperty("phase4.bdew.responder.type"));
+        LOGGER.info("Responder ID: " + System.getProperty("phase4.bdew.responder.id"));
+        LOGGER.info("Agreement: " + System.getProperty("phase4.bdew.agreement"));
+        LOGGER.info("Service: " + System.getProperty("phase4.bdew.service"));
+        LOGGER.info("Action: " + System.getProperty("phase4.bdew.action"));
+        LOGGER.info("Process: " + System.getProperty("phase4.bdew.process"));
+        
+        // Check if crypto properties are okay
+        final AS4CryptoFactoryConfiguration aCF = AS4CryptoFactoryConfiguration.getDefaultInstance();
+        LOGGER.info("Trying to load configured key store from: " + keystorePath);
+        
+        final KeyStore aKS = aCF.getKeyStore();
+        if (aKS == null)
+            throw new InitializationException("Failed to load configured Keystore");
+
+        LOGGER.info("Successfully loaded configured key store from the crypto factory");
+    } catch (Exception ex) {
+        LOGGER.error("Failed to initialize BDEW profile", ex);
+        throw new InitializationException("Failed to initialize BDEW profile", ex);
+    }
+  }
+
   @Override
   protected void initManagers ()
   {
     _initAS4 ();
-    _initPeppolAS4 ();
+    //_initPeppolAS4 ();
+    _initBDEWAS4 ();
   }
 
   @Override
