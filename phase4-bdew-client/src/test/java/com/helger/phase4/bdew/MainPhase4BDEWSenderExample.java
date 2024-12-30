@@ -47,6 +47,7 @@ import java.nio.file.Files;
 import java.security.KeyStore;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
+//import java.net.http.HttpClientSettings;
 
 public class MainPhase4BDEWSenderExample
 {
@@ -72,8 +73,8 @@ public class MainPhase4BDEWSenderExample
     {
       // Load your keystore
       final KeyStore aKS = KeyStoreHelper.loadKeyStoreDirect(EKeyStoreType.PKCS12,
-      KEYSTORE_PATH,
-      KEYSTORE_PASSWORD.toCharArray());
+              KEYSTORE_PATH,
+              KEYSTORE_PASSWORD.toCharArray());
       if (aKS == null) {
         LOGGER.error("Failed to load keystore from path: {}", KEYSTORE_PATH);
         throw new IllegalStateException("Failed to load keystore");
@@ -89,7 +90,7 @@ public class MainPhase4BDEWSenderExample
 
       // Load truststore
       final KeyStore aTrustStore = KeyStoreHelper.loadKeyStoreDirect(EKeyStoreType.PKCS12,
-          "src/test/resources/truststore.p12",
+              "src/test/resources/truststore.p12",
               KEYSTORE_PASSWORD.toCharArray());
       if (aTrustStore == null)
         throw new IllegalStateException("Failed to load truststore");
@@ -156,17 +157,17 @@ public class MainPhase4BDEWSenderExample
 
 
       final KeyStoreAndKeyDescriptor aKSD = KeyStoreAndKeyDescriptor.builder ()
-                .type (EKeyStoreType.PKCS12)
-                .path ("src/test/resources/ks1.p12")
-                .password (KEYSTORE_PASSWORD)
-                .keyAlias (KEY_ALIAS)
-                .keyPassword (KEYSTORE_PASSWORD)
-                .build ();
+              .type (EKeyStoreType.PKCS12)
+              .path ("src/test/resources/ks1.p12")
+              .password (KEYSTORE_PASSWORD)
+              .keyAlias (KEY_ALIAS)
+              .keyPassword (KEYSTORE_PASSWORD)
+              .build ();
       final TrustStoreDescriptor aTSD = TrustStoreDescriptor.builder ()
-                .type (EKeyStoreType.PKCS12)
-                .path ("src/test/resources/truststore.p12")
-                .password (KEYSTORE_PASSWORD)
-                .build ();
+              .type (EKeyStoreType.PKCS12)
+              .path ("src/test/resources/truststore.p12")
+              .password (KEYSTORE_PASSWORD)
+              .build ();
 
       // Read XML payload to send
       final byte [] aPayloadBytes = Files.readAllBytes (new File ("src/test/resources/external/examples/base-example.xml").toPath ());
@@ -186,37 +187,36 @@ public class MainPhase4BDEWSenderExample
 
       // Start configuring here
       final EAS4UserMessageSendResult eResult;
+      System.setProperty("com.sun.security.enableAIAcaIssuers", "true");
+      //HttpClientSettings.setSSLTrustAll(true); // Only for development!
+
       eResult = Phase4BDEWSender.builder()
-                          //Communication Configs
-                          .endpointURL("http://localhost:8080/as4")
-                          .encryptionKeyIdentifierType(ECryptoKeyIdentifierType.X509_KEY_IDENTIFIER)
-                          .signingKeyIdentifierType(ECryptoKeyIdentifierType.BST_DIRECT_REFERENCE)
-                          //----PartyInfo----
-                          .fromPartyIDType("urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088")
-                          .fromPartyID("AS4-Sender")
-                          .fromRole(CAS4.DEFAULT_INITIATOR_URL)
-                          .toPartyIDType("urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088")
-                          .toPartyID("AS4-Receiver")
-                          .toRole(CAS4.DEFAULT_RESPONDER_URL)
-                          //----PartyInfo----
-                          //----CollaborationInfo----
-                          .agreementRef("https://www.bdew.de/as4/communication/agreement")
-                          .service("https://www.bdew.de/as4/communication/services/MP")
-                          .action("http://docs.oasis-open.org/ebxml-msg/as4/200902/action")
-                          //----CollaborationInfo----
-                          .service("AS4-Service")
-                          .action("AS4-Action")
-                          .payload(AS4OutgoingAttachment.builder()
-                                                         .data(aPayloadBytes)
-                                                         .compressionGZIP()
-                                                         .mimeTypeXML()
-                                                         .charset(StandardCharsets.UTF_8),
-                                   aBDEWPayloadParams)
-                          .cryptoFactory(new AS4CryptoFactoryInMemoryKeyStore(aKSD, aTSD))
-                          //.receiverCertificate(aReceiverCert)
-                          //.signalMsgConsumer((aSignalMsg, aMMD, aState) ->
-                          //    aSignalMsgHolder.set(aSignalMsg))
-                          .sendMessageAndCheckForReceipt();
+              //Communication Configs
+              .endpointURL("http://localhost:8080/as4")
+              .encryptionKeyIdentifierType(ECryptoKeyIdentifierType.X509_KEY_IDENTIFIER)
+              .signingKeyIdentifierType(ECryptoKeyIdentifierType.BST_DIRECT_REFERENCE)
+              //----PartyInfo----
+              .fromPartyIDType("urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088")
+              .fromPartyID("AS4-Sender")
+              .fromRole(CAS4.DEFAULT_INITIATOR_URL)
+              .toPartyIDType("urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088")
+              .toPartyID("AS4-Receiver")
+              .toRole(CAS4.DEFAULT_RESPONDER_URL)
+              //----CollaborationInfo----
+              .agreementRef("https://www.bdew.de/as4/communication/agreement")
+              .service("https://www.bdew.de/as4/communication/services/MP")
+              .action("MSCONS")
+              .payload(AS4OutgoingAttachment.builder()
+                              .data(aPayloadBytes)
+                              .compressionGZIP()
+                              .mimeTypeXML()
+                              .charset(StandardCharsets.UTF_8),
+                      aBDEWPayloadParams)
+              .cryptoFactory(new AS4CryptoFactoryInMemoryKeyStore(aKSD, aTSD))
+              //.receiverCertificate(aReceiverCert)
+              //.signalMsgConsumer((aSignalMsg, aMMD, aState) ->
+              //    aSignalMsgHolder.set(aSignalMsg))
+              .sendMessageAndCheckForReceipt();
       LOGGER.info("BDEW send result: " + eResult);
 
 

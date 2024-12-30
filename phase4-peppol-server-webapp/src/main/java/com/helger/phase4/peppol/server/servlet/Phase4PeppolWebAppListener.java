@@ -173,206 +173,7 @@ public final class Phase4PeppolWebAppListener extends WebAppListener
     }
   }
 
-  private static void _initAS4 ()
-  {
-    // Enforce Peppol profile usage
-    AS4ProfileSelector.setCustomDefaultAS4ProfileID (AS4PeppolProfileRegistarSPI.AS4_PROFILE_ID);
 
-    // Start duplicate check
-    AS4ServerInitializer.initAS4Server ();
-
-    // Store the incoming file as is
-    AS4DumpManager.setIncomingDumper (new AS4IncomingDumperFileBased ( (aMessageMetadata,
-                                                                        aHttpHeaderMap) -> StorageHelper.getStorageFile (aMessageMetadata,
-                                                                                                                         ".as4in"))
-    {
-      @Override
-      public void onEndRequest (@Nonnull final IAS4IncomingMessageMetadata aMessageMetadata,
-                                @Nullable final Exception aCaughtException)
-      {
-        // Save the metadata also to a file
-        final File aFile = StorageHelper.getStorageFile (aMessageMetadata, ".metadata");
-        if (SimpleFileIO.writeFile (aFile,
-                                    AS4IncomingHelper.getIncomingMetadataAsJson (aMessageMetadata)
-                                                     .getAsJsonString (JsonWriterSettings.DEFAULT_SETTINGS_FORMATTED),
-                                    StandardCharsets.UTF_8).isFailure ())
-          LOGGER.error ("Failed to write metadata to '" + aFile.getAbsolutePath () + "'");
-        else
-          LOGGER.info ("Wrote metadata to '" + aFile.getAbsolutePath () + "'");
-      }
-    });
-
-    // Store the outgoings file as well
-    AS4DumpManager.setOutgoingDumper (new AS4OutgoingDumperFileBased ( (eMsgMode, sMessageID, nTry) -> StorageHelper
-                                                                                                                    .getStorageFile (sMessageID,
-                                                                                                                                     nTry,
-                                                                                                                                     ".as4out")));
-  }
-
-  private static void _initPeppolAS4 ()
-  {
-    // Our server expects all SBDH to contain the COUNTRY_C1 element in SBDH
-    // (this is the default setting, but added it here for easy modification)
-    // this used to be true, but we don't need it for local testing
-    //Phase4PeppolDefaultReceiverConfiguration.setCheckSBDHForMandatoryCountryC1(true);
-    Phase4PeppolDefaultReceiverConfiguration.setCheckSBDHForMandatoryCountryC1(false);
-
-    // Our server should check all signing certificates of incoming messages if
-    // they are revoked or not
-    // (this is the default setting, but added it here for easy modification)
-    // this used to be true, but we don't need it for local testing
-    //Phase4PeppolDefaultReceiverConfiguration.setCheckSigningCertificateRevocation(true);
-
-    Phase4PeppolDefaultReceiverConfiguration.setCheckSigningCertificateRevocation(false);
-    
-    // Disable signing certificate validation for testing
-    //Phase4PeppolServletConfiguration.setCheckSigningCertificate(false);
-
-    // Make sure the download of CRL is using Apache HttpClient and that the
-    // provided settings are used. If e.g. a proxy is needed to access outbound
-    // resources, it can be configured here
-    final Phase4PeppolHttpClientSettings aHCS = new Phase4PeppolHttpClientSettings ();
-    if (false)
-      aHCS.setProxyHost (new HttpHost (AS4Configuration.getConfig ().getAsString ("http.proxy.host"),
-                                       AS4Configuration.getConfig ().getAsInt ("http.proxy.port")));
-    PeppolCRLDownloader.setAsDefaultCRLCache (aHCS);
-
-    // Throws an exception if configuration parameters are missing
-    final AS4CryptoFactoryConfiguration aCF = AS4CryptoFactoryConfiguration.getDefaultInstance();
-
-    // Add BouncyCastle provider if not already added
-    if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
-        Security.addProvider(new BouncyCastleProvider());
-    }
-
-    // Configure crypto algorithms through configuration properties
-    System.setProperty("phase4.crypto.properties.signaturealgorithm", ECryptoAlgorithmSign.ECDSA_SHA_256.getID());
-    System.setProperty("phase4.crypto.properties.encryptionalgorithm", ECryptoAlgorithmCrypt.AES_128_GCM.getID());
-
-    // The keystore type should be configured in crypto.properties
-
-    // Check if crypto properties are okay - fail early if something is
-    // misconfigured
-    LOGGER.info ("Trying to load configured key store (type=" +
-                 aCF.getKeyStoreDescriptor ().getKeyStoreType () +
-                 ", path=" +
-                 aCF.getKeyStoreDescriptor ().getKeyStorePath () +
-                 ")");
-    final KeyStore aKS = aCF.getKeyStore ();
-    if (aKS == null)
-      throw new InitializationException ("Failed to load configured Keystore");
-    LOGGER.info ("  Successfully loaded configured key store from the crypto factory.");
-    LOGGER.info ("  Loaded key store type is '" + aKS.getType () + "'");
-
-    // List all the aliases - debug only
-    try
-    {
-      final ICommonsList <String> aAliases = CollectionHelper.newList (aKS.aliases ());
-      LOGGER.info ("The keystore contains the following " + aAliases.size () + " alias(es): " + aAliases);
-      int nIndex = 1;
-      for (final String sAlias : aAliases)
-      {
-        String sType = "unknown";
-        try
-        {
-          final KeyStore.Entry aEntry = aKS.getEntry (sAlias,
-                                                      new KeyStore.PasswordProtection (aCF.getKeyStoreDescriptor ()
-                                                                                          .getKeyPassword ()));
-          if (aEntry instanceof PrivateKeyEntry)
-            sType = "private-key";
-          else
-            if (aEntry instanceof KeyStore.SecretKeyEntry)
-              sType = "secret-key";
-            else
-              if (aEntry instanceof KeyStore.TrustedCertificateEntry)
-                sType = "trusted-certificate";
-        }
-        catch (final Exception ex)
-        {
-          // Ignore
-        }
-        LOGGER.info ("  " +
-                     nIndex +
-                     ".: alias(" +
-                     sAlias +
-                     ") type(" +
-                     sType +
-                     ") date(" +
-                     aKS.getCreationDate (sAlias) +
-                     ")");
-        ++nIndex;
-      }
-    }
-    catch (final GeneralSecurityException ex)
-    {
-      LOGGER.error ("Failed to list all aliases in the keystore", ex);
-    }
-
-    // Check if the key configuration is okay - fail early if something is
-    // misconfigured
-    LOGGER.info ("Trying to load configured private key (alias=" + aCF.getKeyAlias () + ")");
-    final PrivateKeyEntry aPKE = aCF.getPrivateKeyEntry ();
-    if (aPKE == null)
-      throw new InitializationException ("Failed to load configured private key");
-    LOGGER.info ("  Successfully loaded configured private key from the crypto factory");
-
-    final X509Certificate aAPCert = (X509Certificate) aPKE.getCertificate ();
-
-    // Try the reverse search in the key store - debug only
-    try
-    {
-      final String sAlias = aKS.getCertificateAlias (aAPCert);
-      LOGGER.info ("  The reverse search of the certificate lead to alias '" + sAlias + "'");
-    }
-    catch (final GeneralSecurityException ex)
-    {
-      LOGGER.error ("Failed to do a reverse search of the certificate", ex);
-    }
-
-    // Check if the certificate is really a Peppol AP certificate - fail early
-    // if something is misconfigured
-    // * Do not cache result
-    // Disable Peppol certificate validation for local testing
-    if (AS4Configuration.getConfig().getAsBoolean("phase4.peppol.validation.disabled", false)) {
-      LOGGER.warn("Peppol certificate validation is disabled - FOR TESTING ONLY!");
-      Phase4PeppolDefaultReceiverConfiguration.setReceiverCheckEnabled(false);
-      return;
-    }
-    // * Use the global checking mode or provide a new one
-    final EPeppolCertificateCheckResult eCheckResult = PeppolCertificateChecker.checkPeppolAPCertificate (aAPCert,
-                                                                                                          MetaAS4Manager.getTimestampMgr ()
-                                                                                                                        .getCurrentDateTime (),
-                                                                                                          ETriState.FALSE,
-                                                                                                          null);
-    if (eCheckResult.isInvalid ())
-      throw new InitializationException ("The provided certificate is not a valid Peppol AP certificate. Check result: " +
-                                         eCheckResult);
-    LOGGER.info ("Successfully checked that the provided certificate is a valid Peppol AP certificate.");
-
-    // Enable or disable, if upon receival, the received should be checked or
-    // not
-    final String sSMPURL = AS4Configuration.getConfig ().getAsString ("smp.url");
-    final String sAPURL = AS4Configuration.getThisEndpointAddress ();
-    if (StringHelper.hasText (sSMPURL) && StringHelper.hasText (sAPURL))
-    {
-      Phase4PeppolDefaultReceiverConfiguration.setReceiverCheckEnabled (true);
-      Phase4PeppolDefaultReceiverConfiguration.setSMPClient (new SMPClientReadOnly (URLHelper.getAsURI (sSMPURL)));
-      Phase4PeppolDefaultReceiverConfiguration.setWildcardSelectionMode (Phase4PeppolDefaultReceiverConfiguration.DEFAULT_WILDCARD_SELECTION_MODE);
-      Phase4PeppolDefaultReceiverConfiguration.setAS4EndpointURL (sAPURL);
-      Phase4PeppolDefaultReceiverConfiguration.setAPCertificate (aAPCert);
-      LOGGER.info (CAS4.LIB_NAME +
-                   " Peppol receiver checks are enabled on SMP '" +
-                   sSMPURL +
-                   "' and AP '" +
-                   sAPURL +
-                   "'");
-    }
-    else
-    {
-      Phase4PeppolDefaultReceiverConfiguration.setReceiverCheckEnabled (false);
-      LOGGER.warn (CAS4.LIB_NAME + " Peppol receiver checks are disabled");
-    }
-  }
 
   private static void _initBDEWAS4()
   {
@@ -381,73 +182,54 @@ public final class Phase4PeppolWebAppListener extends WebAppListener
         Security.addProvider(new BouncyCastleProvider());
     }
 
-    // Configure BDEW Profile settings
-    System.setProperty("phase4.profile", "bdew");
-    
-    // BDEW specific party identifiers with more specific values
-    System.setProperty("phase4.bdew.initiator.type", "urn:oasis:names:tc:ebcore:partyid-type:unregistered:bdew");
-    System.setProperty("phase4.bdew.responder.type", "urn:oasis:names:tc:ebcore:partyid-type:unregistered:bdew");
-    System.setProperty("phase4.bdew.initiator.id", "as4.test.sender");
-    System.setProperty("phase4.bdew.responder.id", "as4.test.receiver");
-    
-    // BDEW specific message properties with updated values
-    System.setProperty("phase4.bdew.agreement", "https://www.bdew.de/as4/communication/agreement");
-    System.setProperty("phase4.bdew.service", "http://bdew.de/services/EDI");
-    System.setProperty("phase4.bdew.action", "EDIMessageProcessing");
-    System.setProperty("phase4.bdew.process", "urn:bdew:de:edl:as4:process");
 
-    // Configure crypto algorithms through configuration properties
-    System.setProperty("phase4.crypto.properties.signaturealgorithm", ECryptoAlgorithmSign.ECDSA_SHA_256.getID());
-    System.setProperty("phase4.crypto.properties.encryptionalgorithm", ECryptoAlgorithmCrypt.AES_128_GCM.getID());
-
-    // Configure TLS named groups for BDEW
-    System.setProperty("jdk.tls.namedGroups", "brainpoolP256r1, brainpoolP384r1, brainpoolP512r1, secp256r1, secp384r1");
-
-    // Configure keystore with absolute path
+//    // Configure keystore with absolute path
     String keystorePath = new File("ks2.p12").getAbsolutePath();
-    System.setProperty("phase4.crypto.properties.keystore.type", "PKCS12");
-    System.setProperty("phase4.crypto.properties.keystore.path", keystorePath);
-    System.setProperty("phase4.crypto.properties.keystore.password", "changeit");
-    System.setProperty("phase4.crypto.properties.keystore.alias", "cert2");
-    System.setProperty("phase4.crypto.properties.keystore.key.password", "changeit");
 
-    // Disable certificate validations for testing
-    System.setProperty("phase4.cert.validation.disabled", "true");
-    System.setProperty("phase4.debug", "true");
-
-    // Initialize BDEW profile
+//    // Initialize BDEW profile
     try {
         // Ensure BDEW profile is registered and set as default
         AS4ProfileSelector.setCustomDefaultAS4ProfileID("bdew");
-        
-        // Completely disable Peppol
-        System.setProperty("phase4.peppol.validation.disabled", "true");
-        System.setProperty("phase4.peppol.enabled", "false");
-        
-        // Enable BDEW validation with debug
-        System.setProperty("phase4.bdew.validation.enabled", "true");
-        System.setProperty("phase4.bdew.debug", "true");
-        
-        // Log current configuration
-        LOGGER.info("BDEW Profile Configuration:");
-        LOGGER.info("Initiator Type: " + System.getProperty("phase4.bdew.initiator.type"));
-        LOGGER.info("Initiator ID: " + System.getProperty("phase4.bdew.initiator.id"));
-        LOGGER.info("Responder Type: " + System.getProperty("phase4.bdew.responder.type"));
-        LOGGER.info("Responder ID: " + System.getProperty("phase4.bdew.responder.id"));
-        LOGGER.info("Agreement: " + System.getProperty("phase4.bdew.agreement"));
-        LOGGER.info("Service: " + System.getProperty("phase4.bdew.service"));
-        LOGGER.info("Action: " + System.getProperty("phase4.bdew.action"));
-        LOGGER.info("Process: " + System.getProperty("phase4.bdew.process"));
-        
+
+
         // Check if crypto properties are okay
         final AS4CryptoFactoryConfiguration aCF = AS4CryptoFactoryConfiguration.getDefaultInstance();
         LOGGER.info("Trying to load configured key store from: " + keystorePath);
-        
+
         final KeyStore aKS = aCF.getKeyStore();
         if (aKS == null)
             throw new InitializationException("Failed to load configured Keystore");
 
         LOGGER.info("Successfully loaded configured key store from the crypto factory");
+
+//      // Start duplicate check
+//      AS4ServerInitializer.initAS4Server();
+//
+//      // Store the incoming file as is
+//      AS4DumpManager.setIncomingDumper(new AS4IncomingDumperFileBased((aMessageMetadata,
+//                                                                       aHttpHeaderMap) -> StorageHelper.getStorageFile(aMessageMetadata,
+//              ".as4in")) {
+//        @Override
+//        public void onEndRequest(@Nonnull final IAS4IncomingMessageMetadata aMessageMetadata,
+//                                 @Nullable final Exception aCaughtException) {
+//          // Save the metadata also to a file
+//          final File aFile = StorageHelper.getStorageFile(aMessageMetadata, ".metadata");
+//          if (SimpleFileIO.writeFile(aFile,
+//                  AS4IncomingHelper.getIncomingMetadataAsJson(aMessageMetadata)
+//                          .getAsJsonString(JsonWriterSettings.DEFAULT_SETTINGS_FORMATTED),
+//                  StandardCharsets.UTF_8).isFailure())
+//            LOGGER.error("Failed to write metadata to '" + aFile.getAbsolutePath() + "'");
+//          else
+//            LOGGER.info("Wrote metadata to '" + aFile.getAbsolutePath() + "'");
+//        }
+//      });
+//
+//      // Store the outgoings file as well
+//      AS4DumpManager.setOutgoingDumper(new AS4OutgoingDumperFileBased((eMsgMode, sMessageID, nTry) -> StorageHelper
+//              .getStorageFile(sMessageID,
+//                      nTry,
+//                      ".as4out")));
+
     } catch (Exception ex) {
         LOGGER.error("Failed to initialize BDEW profile", ex);
         throw new InitializationException("Failed to initialize BDEW profile", ex);
@@ -457,8 +239,6 @@ public final class Phase4PeppolWebAppListener extends WebAppListener
   @Override
   protected void initManagers ()
   {
-    _initAS4 ();
-    //_initPeppolAS4 ();
     _initBDEWAS4 ();
   }
 
