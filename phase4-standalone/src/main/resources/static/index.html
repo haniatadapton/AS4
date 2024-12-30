@@ -1,0 +1,43 @@
+<!--
+
+    Copyright (C) 2023-204 Philip Helger (www.helger.com)
+    philip[at]helger[dot]com
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>phase4-peppol-standalone</title>
+    <style type="text/css">
+* { font-family: sans-serif; }
+code { font-family: 'Courier New', Courier, monospace; color:firebrick; background-color: #eee; }
+div { margin:1em 0; }
+</style>
+  </head>
+  <body>
+    <h1>phase4-peppol-standalone is working</h1>
+    <div>See <a href="https://github.com/phax/phase4-peppol-standalone/">https://github.com/phax/phase4-peppol-standalone/</a> for details.</div>
+
+    <h2>Sending Peppol messages</h2>
+    <div>Send Peppol test messages (SMK) via <code>/sendtest/{senderId}/{receiverId}/{docTypeId}/{processId}/{countryC1}</code></div>
+    <div>Send Peppol production messages (SML) via <code>/sendprod/{senderId}/{receiverId}/{docTypeId}/{processId}/{countryC1}</code></div>
+    
+    <h2>Receiving Peppol messages</h2>
+    <div>Peppol AS4 messages are received via HTTP POST at <code>/as4</code></div>
+
+    <h2>Message History</h2>
+    <div>View received messages at <a href="/messages"><code>/messages</code></a></div>
+  </body>
+</html>

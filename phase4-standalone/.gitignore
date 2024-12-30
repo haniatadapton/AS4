@@ -1,0 +1,11 @@
+.classpath
+.project
+.settings/
+
+bin/
+target/
+generated/
+
+private-*.properties
+*.p12
+*.jks
